@@ -1,4 +1,4 @@
 paulymer
 ========
 
-A project to test the polymer project
+A project to test polymer
