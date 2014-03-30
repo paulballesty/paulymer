@@ -208,7 +208,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'elements/**',
                         'lib-elements/**',
-                        'images/{,*/}*.{webp,gif}'
+                        'images/{,*/}*.{webp,gif}',
+                        'bower_components/**',
                     ]
                 }]
             }
