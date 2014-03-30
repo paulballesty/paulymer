@@ -1,0 +1,17 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="polymer-top-github-repositories"  constructor="TopGithubRepositoriesElement" attributes="language">
+  <template>
+    <style>
+      :host { display: block; }
+    </style>
+    <div class="container">
+      <h1>Top {{language}} Github Repositories</h1>
+    </div>
+  </template>
+  <script>
+    Polymer('polymer-top-github-repositories', {
+      language: "Javascript",
+    });
+  </script>
+</polymer-element>
