@@ -4,7 +4,8 @@
   "dependencies": {
     "sass-bootstrap": "~3.0.0",
     "platform": "Polymer/platform#master",
-    "polymer": "Polymer/polymer#master"
+    "polymer": "Polymer/polymer#master",
+    "polymer-jsonp": "Polymer/polymer-jsonp#~0.2.1"
   },
   "devDependencies": {}
 }
