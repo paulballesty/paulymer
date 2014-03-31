@@ -1,4 +1,4 @@
 paulymer
 ========
 
-A project to test polymer
+A project to test the [polymer-project](http://www.polymer-project.org/)
