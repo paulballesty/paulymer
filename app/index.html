@@ -12,20 +12,19 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild-->
 
     <!-- Place your HTML imports here -->
     <script src="bower_components/platform/platform.js"></script>
     <link rel="import" href="elements/top-github-repositories.html">
+    <link rel="import" href="elements/personal-signature.html">
   </head>
   <body>
     <polymer-top-github-repositories></polymer-top-github-repositories>
-    <script>
-      document.addEventListener('WebComponentsReady', function() {
-          // Perform some behaviour
-      });
-    </script>
-    
+    <footer>
+      <polymer-personal-signature></polymer-personal-signature>
+    </footer>
   </body>
 </html>
