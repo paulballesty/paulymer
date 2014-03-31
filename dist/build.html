@@ -212,6 +212,12 @@ license that can be found in the LICENSE file.
     </style>
     <div class="container">
       <h1>Top {{language}} Repositories in Github</h1>
+      <div class="text-center">
+        <a href="https://github.com/paulballesty/paulymer">
+          ( <span class="glyphicon glyphicon-link" target="_blank"></span>
+          https://github.com/paulballesty/paulymer )
+        </a>
+      </div>
       <template repeat="{{repository in repositories.data.items}}">
         <polymer-github-repository repository="{{repository}}"></polymer-github-repository>
       </template>
