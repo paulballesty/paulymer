@@ -1,0 +1,37 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="polymer-personal-signature"  attributes="">
+  <template>
+    <style>
+      :host { 
+        display: block; 
+        text-align: center;
+        padding: 25px 0;
+      }
+
+      :host a, :host a:hover {
+        text-decoration: none !important;
+        padding: 0 10px;
+      }
+
+      :host i {
+        font-size: 20px !important;
+        vertical-align: middle !important;
+      }
+    </style>
+    <template repeat="{{account in accounts}}">
+      <a href="{{account.url}}" target="_blank">
+        <i class="fa {{account.icon}}"></i>
+        <span>{{account.username}}</span>
+      </a>
+    </template>
+  </template>
+  <script>
+    Polymer('polymer-personal-signature', {
+      accounts: [
+        {username: "paulballesty", url: "https://github.com/paulballesty", icon: "fa-github"},
+        {username: "paulballesty", url: "https://twitter.com/paulballesty", icon: "fa-twitter"},
+      ],
+    });
+  </script>
+</polymer-element>

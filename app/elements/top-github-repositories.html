@@ -8,7 +8,7 @@
       :host { display: block; }
     </style>
     <div class="container">
-      <h1>Top {{language}} Github Repositories</h1>
+      <h1>Top {{language}} Repositories in Github</h1>
       <template repeat="{{repository in repositories.data.items}}">
         <polymer-github-repository repository="{{repository}}"></polymer-github-repository>
       </template>
