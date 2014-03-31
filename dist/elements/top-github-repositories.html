@@ -1,0 +1,23 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer-jsonp/polymer-jsonp.html">
+<link rel="import" href="../elements/github-repository.html">
+
+<polymer-element name="polymer-top-github-repositories"  constructor="TopGithubRepositoriesElement" attributes="language">
+  <template>
+    <style>
+      :host { display: block; }
+    </style>
+    <div class="container">
+      <h1>Top {{language}} Repositories in Github</h1>
+      <template repeat="{{repository in repositories.data.items}}">
+        <polymer-github-repository repository="{{repository}}"></polymer-github-repository>
+      </template>
+    </div>
+    <polymer-jsonp auto url="https://api.github.com/search/repositories?q=language:{{language}}&sort=stars&callback=" response="{{repositories}}"></polymer-jsonp>
+  </template>
+  <script>
+    Polymer('polymer-top-github-repositories', {
+      language: "Javascript",
+    });
+  </script>
+</polymer-element>

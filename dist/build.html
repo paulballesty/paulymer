@@ -1,0 +1,268 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Top Javascript Github Repositories</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- Place your HTML imports here -->
+    <script src="../app/bower_components/platform/platform.js"></script>
+
+    
+    
+  </head>
+  <body><polymer-element name="polymer-body" extends="body" assetpath="../app/bower_components/polymer/">
+
+  <script>
+
+  // upgrade polymer-body last so that it can contain other imported elements
+  document.addEventListener('polymer-ready', function() {
+    
+    Polymer('polymer-body', Platform.mixin({
+
+      created: function() {
+        this.template = document.createElement('template');
+        var body = wrap(document).body;
+        var c$ = body.childNodes.array();
+        for (var i=0, c; (c=c$[i]); i++) {
+          if (c.localName !== 'script') {
+            this.template.content.appendChild(c);
+          }
+        }
+        // snarf up user defined model
+        window.model = this;
+      },
+
+      parseDeclaration: function(elementElement) {
+        this.lightFromTemplate(this.template);
+      }
+
+    }, window.model));
+
+  });
+
+  </script>
+
+</polymer-element>
+<!--
+ Copyright 2013 The Polymer Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style
+ license that can be found in the LICENSE file.
+-->
+<script src="../app/bower_components/polymer/polymer.js"></script>
+<!-- <link rel="import" href="../polymer-dev/polymer.html"> -->
+
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<!--
+/**
+ * @module Polymer Elements
+ */
+/**
+ * polymer-jsonp can be used to perform JSONP requests.
+ 
+ * Example:
+ *
+ *     <polymer-jsonp url="https://clients1.google.com/finance/info?q=GOOG&client=ig&callback="
+ *         response="{{data}}"></polymer-jsonp>
+ *
+ * @class polymer-jsonp
+ */
+/**
+ * Fired when a response is received.
+ *
+ * @event polymer-response
+ */
+-->
+
+
+<polymer-element name="polymer-jsonp" attributes="url response auto bustCache" assetpath="../app/bower_components/polymer-jsonp/">
+  <script>
+    (function() {
+      Polymer('polymer-jsonp', {
+        /**
+         * The URL target of the request.
+         * 
+         * @attribute url
+         * @type string
+         * @default ''
+         */
+        url: '',
+        /**
+         * Returns the response object.
+         *
+         * @attribute response
+         * @type Object
+         * @default null
+         */
+        response: null,
+        bustCache: false,
+        auto: false,
+        urlChanged: function() {
+          if (this.url && this.auto) {
+            this.go();
+          }
+        },
+        /**
+         * Performs a JSONP request to the url specified.
+         *
+         * @method go
+         */
+        go: function() {
+          if (!this.isInFlight()) {
+            this.callbackFunc = JSONP_CALLBACK_FUNC_NAME + callbackId++;
+            window[this.callbackFunc] = this.respond.bind(this);
+            var url = this.url + this.callbackFunc + (this.bustCache ? '&' + Math.random() : '');
+            this.addScript(url);
+          }
+        },
+        isInFlight: function() {
+          return !!this.script;
+        },
+        addScript: function(inSrc) {
+          this.script = document.createElement('script');
+          this.script.src = inSrc;
+          this.script.onerror = this.respond.bind(this);
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(this.script, s);
+        },
+        removeScript: function() {
+          if (this.script.parentNode) {
+            this.script.parentNode.removeChild(this.script);
+          }
+          this.script = null;
+        },
+        respond: function(inResponse) {
+          this.response = inResponse;
+          this.removeScript();
+          delete window[this.callbackFunc];
+          this.fire('polymer-response', {response: inResponse});
+        }
+      });
+      var JSONP_CALLBACK_FUNC_NAME = '_polymer_jsonp_callback_';
+      var callbackId = 0;
+    })();
+  </script>
+</polymer-element>
+
+
+
+<polymer-element name="polymer-github-repository" constructor="GithubRepositoryElement" attributes="repository" assetpath="../app/elements/">
+  <template>
+    <style>
+      :host { 
+        display: block;
+        padding: 30px;
+        clear: both;
+      }
+
+      :host img.logo {
+        width:150px;
+        height:150px;
+      }
+
+      :host .details {
+        padding: 5px;
+      }
+    </style>
+    <div class="row">
+      <img class="col-md-2" src="{{repository.owner.avatar_url}}" alt="{{repository.fullname}}">
+      <div class="col-md-10">
+        <h3>{{repository.name}}</h3>
+        <p>{{repository.description}}</p>
+        <a href="{{repository.html_url}}" target="_blank">{{repository.html_url}}</a>
+        <div class="details">
+          <span class="glyphicon glyphicon-star"></span>
+          <strong>Stars:</strong>
+          {{repository.stargazers_count}}
+          <span class="glyphicon glyphicon-random" style="margin-left:15px;"></span>
+          <strong>Forks:</strong>
+          {{repository.forks}}
+          <span class="glyphicon glyphicon-warning-sign" style="margin-left:15px;"></span>
+          <strong>Open issues:</strong>
+          {{repository.open_issues}}
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer('polymer-github-repository');
+  </script>
+</polymer-element>
+
+
+
+
+<polymer-element name="polymer-top-github-repositories" constructor="TopGithubRepositoriesElement" attributes="language" assetpath="../app/elements/">
+  <template>
+    <style>
+      :host { display: block; }
+    </style>
+    <div class="container">
+      <h1>Top {{language}} Repositories in Github</h1>
+      <template repeat="{{repository in repositories.data.items}}">
+        <polymer-github-repository repository="{{repository}}"></polymer-github-repository>
+      </template>
+    </div>
+    <polymer-jsonp auto="" url="https://api.github.com/search/repositories?q=language:{{language}}&amp;sort=stars&amp;callback=" response="{{repositories}}"></polymer-jsonp>
+  </template>
+  <script>
+    Polymer('polymer-top-github-repositories', {
+      language: "Javascript",
+    });
+  </script>
+</polymer-element>
+
+
+<polymer-element name="polymer-personal-signature" attributes="" assetpath="../app/elements/">
+  <template>
+    <style>
+      :host { 
+        display: block; 
+        text-align: center;
+        padding: 25px 0;
+      }
+
+      :host a, :host a:hover {
+        text-decoration: none !important;
+        padding: 0 10px;
+      }
+
+      :host i {
+        font-size: 20px !important;
+        vertical-align: middle !important;
+      }
+    </style>
+    <template repeat="{{account in accounts}}">
+      <a href="{{account.url}}" target="_blank">
+        <i class="fa {{account.icon}}"></i>
+        <span>{{account.username}}</span>
+      </a>
+    </template>
+  </template>
+  <script>
+    Polymer('polymer-personal-signature', {
+      accounts: [
+        {username: "paulballesty", url: "https://github.com/paulballesty", icon: "fa-github"},
+        {username: "paulballesty", url: "https://twitter.com/paulballesty", icon: "fa-twitter"},
+      ],
+    });
+  </script>
+</polymer-element>
+    <polymer-top-github-repositories></polymer-top-github-repositories>
+    <footer>
+      <polymer-personal-signature></polymer-personal-signature>
+    </footer>
+  </body>
+</html>

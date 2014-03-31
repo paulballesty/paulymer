@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="polymer-github-repository"  constructor="GithubRepositoryElement" attributes="repository">
+  <template>
+    <style>
+      :host { 
+        display: block;
+        padding: 30px;
+        clear: both;
+      }
+
+      :host img.logo {
+        width:150px;
+        height:150px;
+      }
+
+      :host .details {
+        padding: 5px;
+      }
+    </style>
+    <div class="row">
+      <img class="col-md-2" src="{{repository.owner.avatar_url}}" alt="{{repository.fullname}}" />
+      <div class="col-md-10">
+        <h3>{{repository.name}}</h3>
+        <p>{{repository.description}}</p>
+        <a href="{{repository.html_url}}" target="_blank">{{repository.html_url}}</a>
+        <div class="details">
+          <span class="glyphicon glyphicon-star"></span>
+          <strong>Stars:</strong>
+          {{repository.stargazers_count}}
+          <span class="glyphicon glyphicon-random" style="margin-left:15px;"></span>
+          <strong>Forks:</strong>
+          {{repository.forks}}
+          <span class="glyphicon glyphicon-warning-sign" style="margin-left:15px;"></span>
+          <strong>Open issues:</strong>
+          {{repository.open_issues}}
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer('polymer-github-repository');
+  </script>
+</polymer-element>
