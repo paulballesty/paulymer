@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymer-jsonp/polymer-jsonp.html">
 <link rel="import" href="../elements/github-repository.html">
+<link rel="import" href="../elements/language-selector.html">
 
 <polymer-element name="polymer-top-github-repositories"  constructor="TopGithubRepositoriesElement" attributes="language">
   <template>
@@ -15,6 +16,7 @@
           https://github.com/paulballesty/paulymer )
         </a>
       </div>
+      <polymer-language-selector languages="{{languages}}" selected="{{language}}">Choose your favourite language</polymer-language-selector>
       <template repeat="{{repository in repositories.data.items}}">
         <polymer-github-repository repository="{{repository}}"></polymer-github-repository>
       </template>
@@ -23,7 +25,10 @@
   </template>
   <script>
     Polymer('polymer-top-github-repositories', {
-      language: "Javascript",
+      ready: function () {
+        this.language = "Javascript";
+        this.languages = ["JavaScript", "Python", "C++", "CSS", "Objective-C", "Java", "Ruby"].sort();
+      }
     });
   </script>
 </polymer-element>

@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="polymer-language-selector"  constructor="LanguageSelectorElement" attributes="languages language">
+  <template>
+    <style>
+      :host { 
+        display: block; 
+        text-align: center;
+        padding: 20px 0 0 0;
+      }
+    </style>
+    <content></content>
+    <select>
+      <template repeat="{{languageOption in languages}}">
+        <option value="{{languageOption}}">{{languageOption}}</option>
+      </template>
+    </select>
+  </template>
+  <script>
+    Polymer('polymer-language-selector', {
+
+    });
+  </script>
+</polymer-element>
